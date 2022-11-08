@@ -23,7 +23,7 @@
     "fs-extra": "^10.1.0"
   },
   "devDependencies": {
-    "@oclif/test": "^2.2.8",
+    "@oclif/test": "^2.2.10",
     "@types/chai": "^4",
     "@types/fs-extra": "^9.0.13",
     "@types/mocha": "^9.0.0",
