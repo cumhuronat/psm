@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="26179249-9c02-46f4-9ff9-d083cc7f6c77" name="postgres2">
+        <fileTransfer rootFolder="/root/snapshotmanager/psm" accessType="SFTP" host="157.90.36.43" port="22" sshConfigId="958df529-73eb-4480-b084-eec4d042299c" sshConfig="root@157.90.36.43:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
