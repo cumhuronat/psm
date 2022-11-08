@@ -1,15 +1,21 @@
 {
-  "name": "psm",
-  "version": "0.0.0",
+  "name": "@storespynet/psm",
+  "version": "1.0.0",
   "description": "Postgresql Snapshot Manager",
   "author": "Cumhur Onat",
   "bin": {
     "psm": "./bin/run"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "homepage": "https://github.com/storespynet/psm",
   "license": "MIT",
   "main": "dist/index.js",
-  "repository": "storespynet/psm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storespynet/psm.git"
+  },
   "files": [
     "/bin",
     "/dist",
@@ -22,13 +28,13 @@
     "@oclif/plugin-plugins": "^2.1.7",
     "chalk": "^4",
     "fs-extra": "^10.1.0",
-    "inquirer": "^9.1.4"
+    "inquirer": "8.2.4"
   },
   "devDependencies": {
     "@oclif/test": "^2.2.10",
     "@types/chai": "^4",
     "@types/fs-extra": "^9.0.13",
-    "@types/inquirer": "^9.0.3",
+    "@types/inquirer": "8.2.4",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.18.3",
     "chai": "^4",

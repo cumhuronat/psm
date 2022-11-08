@@ -1,8 +1,7 @@
 import {CliUx, Command} from '@oclif/core'
 import {getSnapshots} from '../utils/helpers'
 import {execSync} from 'node:child_process'
-// convert the following import to dynamic import
-import inquirer from 'inquirer'
+import * as inquirer from 'inquirer'
 
 export default class Delete extends Command {
   static description = 'delete a snapshot'
@@ -27,18 +26,39 @@ export default class Delete extends Command {
       snapshot = responses.snapshot
     }
 
-    if (!allSnapshots.some(snap => snap.name === snapshot)) {
+    const selectedSnapshot = allSnapshots.find(snap => snap.name === snapshot)
+
+    if (!selectedSnapshot) {
       this.error('snapshot does not exist')
     }
 
     const confirm = await CliUx.ux.prompt(`Are you sure you want to delete ${snapshot}? (y/n)`)
 
     if (confirm === 'y') {
+      if (selectedSnapshot.active) {
+        try {
+          CliUx.ux.action.start('stopping postgres instance')
+          execSync(`systemctl stop --quiet postgresql@14-${snapshot}.service`)
+          CliUx.ux.action.stop()
+        } catch {
+          CliUx.ux.action.stop('could not stop postgres instance')
+        }
+      }
+
       try {
-        execSync(`systemctl stop --quiet postgresql@14-${args.name}.service`)
-        this.log(`snapshot ${args.name} has been stopped`)
+        CliUx.ux.action.start('removing snapshot on disk')
+        execSync(`btrfs subvolume delete /pg_data/14/${snapshot}`)
+        CliUx.ux.action.stop()
       } catch {
-        this.error('snapshot could not be stopped')
+        CliUx.ux.action.stop('could not delete snapshot on disk')
+      }
+
+      try {
+        CliUx.ux.action.start('removing postgres configuration on disk')
+        execSync(`rm -rf /etc/postgresql/14/${snapshot}`)
+        CliUx.ux.action.stop()
+      } catch {
+        CliUx.ux.action.stop('could not delete postgres configuration on disk')
       }
     } else {
       this.log('cancelled by user')
