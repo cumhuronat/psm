@@ -28,7 +28,7 @@
     "@oclif/plugin-plugins": "^2.1.7",
     "chalk": "^4",
     "fs-extra": "^10.1.0",
-    "inquirer": "8.2.4"
+    "inquirer": "8.2.6"
   },
   "devDependencies": {
     "@oclif/test": "^2.2.10",
