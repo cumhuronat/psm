@@ -31,7 +31,7 @@
     "inquirer": "8.2.4"
   },
   "devDependencies": {
-    "@oclif/test": "^2.2.10",
+    "@oclif/test": "^3.2.15",
     "@types/chai": "^4",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "8.2.4",
